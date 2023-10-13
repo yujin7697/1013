@@ -222,20 +222,27 @@
   </div>
 </header>
 
-
 <div class="container">
   <h2>게시물 작성</h2>
 
-  <form action="/post" method="post" enctype="multipart/form-data">
+  <!-- 에러 메시지 표시 부분 -->
+<!--  <div th:if="${error}" class="error-message">-->
+<!--    <div id="popup" class="popup">-->
+<!--      <p th:text="${error}"></p>-->
+<!--    </div>-->
+<!--  </div>-->
+
+  <form action="/post" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
+
     <div class="form-group">
       <label>글쓴이 닉네임 </label>
-      <span th:text="${dto.nickname}"></span><br/>
+      <span th:text="${dto.nickname}"></span><br />
 
       <label for="email">글쓴이 이메일 </label>
       <input type="text" id="email" name="email" th:value="${#authentication.principal.username}" readonly />
     </div>
 
-    <div class="gongi">욕설 또는 다른 사용자에게 피해가 되는 언어는 자제해주세요.<br/>이메일은 게시글에 공개되지 않습니다.</div>
+    <div class="gongi">욕설 또는 다른 사용자에게 피해가 되는 언어는 자제해주세요.<br />이메일은 게시글에 공개되지 않습니다.</div>
 
     <div class="form-group">
       <label for="contents"></label>
@@ -249,5 +256,21 @@
   </form>
 </div>
 
+<script>
+  function validateForm(){
+  const formFile = document.getElementById("formFile");
+
+  if(formFile.files.length == 0){
+  alert("사진을 첨부해주세요.");
+  return false;
+  }
+  return true;
+  }
+</script>
+
+
+
 </body>
+
+
 </html>

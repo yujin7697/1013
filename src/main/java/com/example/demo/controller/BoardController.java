@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.Cookie;
@@ -95,8 +96,10 @@ public class BoardController {
     @PostMapping("/post")
     public String post_post(
             @Valid BoardDto dto,
+            @RequestParam("files") MultipartFile[] files,
             BindingResult bindingResult,
-            Model model
+            Model model,
+            RedirectAttributes redirectAttributes
     ) throws IOException {
         log.info("POST /post");
 
@@ -107,6 +110,13 @@ public class BoardController {
             }
             return "/post"; // 폼 다시 표시
         }
+
+        if (files == null || files.length == 0 || files[0].isEmpty()) {
+            // 이미지를 첨부하지 않은 경우
+            redirectAttributes.addFlashAttribute("error", "이미지를 첨부해주세요.");
+            return "redirect:/post";
+        }
+
 
         boolean isAdd = boardService.addBoard(dto);
 
