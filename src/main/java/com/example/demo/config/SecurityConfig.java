@@ -53,7 +53,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers("/","/public","/login","/join","/checkDuplicate","/checkNicknameDuplicate").permitAll()
 				.antMatchers("/static/css/**","/js/**","/images/**").permitAll()
-				.antMatchers("/user").hasRole("USER")				//ROLE_USER
+				.antMatchers("/user/**").permitAll()				//ROLE_USER
 				.antMatchers("/member").hasRole("MEMBER")			//ROLE_MEMBER
 				.antMatchers("/admin").hasRole("ADMIN")				//ROLE_ADMIN
 				.anyRequest().authenticated()									//나머지 URL은 모두 인증작업이 완료된 이후 접근가능

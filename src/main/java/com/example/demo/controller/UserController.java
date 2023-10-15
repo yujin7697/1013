@@ -307,7 +307,7 @@ public class UserController {
 
 		//저장위치 /resources/static/images/계정명폴더/파일명
 		//폴더 경로 확인
-		Resource resource = resourceLoader.getResource("classpath:static/images/user");
+		Resource resource = resourceLoader.getResource("src/main/resources/static/images/user");
 		File getfiles = resource.getFile();
 		String absolutePath = getfiles.getAbsolutePath();
 		System.out.println("정적 자원 경로: " + absolutePath);
