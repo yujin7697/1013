@@ -61,14 +61,6 @@ public class UserService {
             return false; // 예외 발생 시 탈퇴 실패
         }
     }
-    @Transactional
-    public void updateUserProfilePicture(String email, String profilePicturePath) {
-        User user = userRepository.findByEmail(email);
-        if (user != null) {
-            user.setProfile(profilePicturePath);
-            userRepository.save(user);
-        }
-    }
 
     public boolean joinMember(UserDto dto, Model model, HttpServletRequest request) {
 
@@ -89,6 +81,13 @@ public class UserService {
         List<User> userList = userRepository.findByNickname(keyword);
         System.out.println("userList: " + userList);
         return userList;
+    }
+
+    public void updateProfile(UserDto dto){
+        User user = UserDto.dtoToEntity(dto);
+
+        userRepository.save(user);
+
     }
 
 

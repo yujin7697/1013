@@ -58,4 +58,21 @@ public class UserDto {
 
 	}
 
+	public static User dtoToEntity(UserDto dto){
+		User user = User.builder()
+				.email(dto.getEmail())
+				.password(dto.getPassword())
+				.nickname(dto.getNickname())
+				.name(dto.getName())
+				.birth(dto.getBirth())
+				.role(dto.getRole())
+				.phone(dto.getPhone())
+				.zipcode(dto.getZipcode())
+				.addr1(dto.getAddr1())
+				.addr2(dto.getAddr2())
+				.profile(dto.getProfile())
+				.build();
+		return user;
+	}
+
 }

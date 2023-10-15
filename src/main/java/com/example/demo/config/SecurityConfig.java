@@ -11,7 +11,6 @@ import com.example.demo.config.auth.exceptionhandler.CustomAuthenticationEntryPo
 import com.example.demo.config.auth.loginHandler.CustomAuthenticationFailureHandler;
 import com.example.demo.config.auth.loginHandler.CustomLoginSuccessHandler;
 import com.example.demo.config.auth.logoutHandler.CustomLogoutHandler;
-import com.example.demo.config.auth.logoutHandler.OAuthLogoutHandler;
 import com.example.demo.config.auth.logoutHandler.CustomLogoutSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -53,7 +52,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 		http
 				.authorizeRequests()
 				.antMatchers("/","/public","/login","/join","/checkDuplicate","/checkNicknameDuplicate").permitAll()
-				.antMatchers("/css/**","/js/**","/images/**").permitAll()
+				.antMatchers("/static/css/**","/js/**","/images/**").permitAll()
 				.antMatchers("/user").hasRole("USER")				//ROLE_USER
 				.antMatchers("/member").hasRole("MEMBER")			//ROLE_MEMBER
 				.antMatchers("/admin").hasRole("ADMIN")				//ROLE_ADMIN
